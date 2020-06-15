@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	if(!isset($_SESSION['uname']))
+	if(!isset($_SESSION['admin']))
 	{
 		header("location: ../login.php");
 	}
@@ -8,6 +8,7 @@
 	{
 		if(isset($_GET['unid']) && isset($_GET['sem']))
 		{
+		    $student_id = $_GET['student_id'];
 			$unid = $_GET['unid'];
 			$a = $_GET['unid'];
 			$sem= $_GET['sem'];
@@ -17,13 +18,13 @@
 			
 			$refresh= "<script type='text/javascript'>
 			setTimeout(function () {
-			window.location.href= 'result_edit.php?sem=$sem&unid=$unid'; },3000);
+			window.location.href= 'result_edit.php?student_id=$student_id&sem=$sem&unid=$unid'; },500);
 			countDown(5,'status');
 		</script>";	
 			
 			
-			include"../db.php";
-			include"../function_list.php";
+			include"../../db.php";
+			include"../../function_list.php";
 			$i= mysqli_fetch_assoc(mysqli_query($new,"SELECT * FROM student_info where uniqueid=$a"));
 			$n= $i['name'];
 			$cl= $i['class'];
@@ -38,7 +39,7 @@
 			if($b==111){$semester='First Semester Weekly';}
 			if($b==211){$semester='Second Semester Weekly';}
 			if($b==311){$semester='Third Semester Weekly';}
-			$oo= "<table><tr>
+			$oo= "<table class='table table-sm'><tr>
 				<td>$n</td>
 				<td>$c</td>
 				<td>Roll: $r</td>
@@ -61,7 +62,7 @@
 				 ";
 				
 			}
-			$final_out="<br /><table><form action='result_edit.php?unid=$unid&sem=$sem' method='POST'>
+			$final_out="<br /><table class='table table-sm'><form action='result_edit.php?student_id=$student_id&unid=$unid&sem=$sem' method='POST'>
 			$output <tr>
 				<td align='center' colspan='2'><input type='submit' value='Update' name='update' /></td>
 			</tr></form></table>";
@@ -111,19 +112,19 @@
 <html lang="en-US">
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="../style.css" />
-	<link rel="stylesheet" href="../style_1.css" />
-	<link rel="shortcut icon" href="../img/icon.ico">
+	<link rel="stylesheet" href="../../src/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="../../src/fa/css/all.css" />
+	<link rel="icon" href="../../img/icon.ico" />
 	<title>Edit</title>
 </head>
 <body>
 	<?php include"../header.php"?>
-	<div class="row">
-	<div class="column1">
-		<a class='bttn' href="../">Home</a>
-		<?php echo"<a class='bttn' href='add.php?unid=$unid&sem=$sem'>Return Back</a>";?>
+	<div class="row m-0 p-0">
+	<div class="col-md-2">
+		<a class='btn btn-info w-100 mt-2' href="../">Home</a>
+		<?php echo"<a class='btn btn-info w-100 mt-2' href='add.php?student_id=$student_id&unid=$unid&sem=$sem'>Return Back</a>";?>
 	</div>
-	<div class="column2">
+	<div class="col-md-8">
 			
 	<div class="msg"><?php echo $semester;?></div>
 	<?php echo $msg;?>
@@ -131,7 +132,7 @@
 	<?php echo $final_out;?>
 
 	</div>
-	<div class="column3"></div>
+	<div class="col-md-2"></div>
 	</div>
 	
 </body>

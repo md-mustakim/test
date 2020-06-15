@@ -67,73 +67,73 @@
 
 		$pre1w= mysqli_num_rows(mysqli_query($new,"SELECT * FROM marksheed_2019 where regid=$unid and type=111"));			
 
-		if($pre1w==0){ $p1w="<a class='bttn' href='add.php?unid=$unid&sem=111'>1st Semester Weekly</a>"; $datashow1w=1;}
+		if($pre1w==0){ $p1w="<a class='btn btn-info w-100 mt-2' href='add.php?student_id=$student_id&unid=$unid&sem=111'>1st Semester Weekly</a>";}
 
-		else{$p1w="<a class='bttn' style='background:green;' href='result_edit.php?unid=$unid&sem=111' target='_blank' title='Edit Result'>1st Semester Weekly</a>";$datashow1w=0;}
+		else{$p1w="<a class='btn btn-info w-100 mt-2'  href='result_edit.php?student_id=$student_id&unid=$unid&sem=111' target='_blank' title='Edit Result'>1st Semester Weekly</a>";}
 
 		
 
 		$pre1= mysqli_num_rows(mysqli_query($new,"SELECT * FROM marksheed_2019 where regid=$unid and type=101"));			
 
-		if($pre1==0){ $p1="<a class='bttn' href='add.php?unid=$unid&sem=101'>1st Pre Semester</a>"; $datashow1=1;}
+		if($pre1==0){ $p1="<a class='btn btn-info w-100' href='add.php?student_id=$student_id&unid=$unid&sem=101'>1st Pre Semester</a>"; $datashow1=1;}
 
-		else{$p1="<a class='bttn' style='background:green;' href='result_edit.php?unid=$unid&sem=101' target='_blank' title='Edit Result'>1st Pre Semester</a>";$datashow1=0;}
+		else{$p1="<a class='btn btn-success w-100'  href='result_edit.php?student_id=$student_id&unid=$unid&sem=101' target='_blank' title='Edit Result'>1st Pre Semester</a>";$datashow1=0;}
 
 		
 
 		$pre2= mysqli_num_rows(mysqli_query($new,"SELECT * FROM marksheed_2019 where regid=$unid and type=100"));
 
-		if($pre2==0){ $p2="<a class='bttn' href='add.php?unid=$unid&sem=100'>1st Semester</a>";$datashow2=1;}
+		if($pre2==0){ $p2="<a class='btn btn-info w-100 mt-2' href='add.php?student_id=$student_id&unid=$unid&sem=100'>1st Semester</a>";$datashow2=1;}
 
-		else{$p2="<a class='bttn' style='background:green;' href='result_edit.php?unid=$unid&sem=100' target='_blank' title='Edit Result'>1st Semester</a>";$datashow2=0;}
+		else{$p2="<a class='btn btn-success w-100 mt-2' href='result_edit.php?student_id=$student_id&unid=$unid&sem=100' target='_blank' title='Edit Result'>1st Semester</a>";$datashow2=0;}
 
 		
 
 		$pre3w= mysqli_num_rows(mysqli_query($new,"SELECT * FROM marksheed_2019 where regid=$unid and type=211"));
 
-		if($pre3w==0){ $p3ww="<a class='bttn' href='add.php?unid=$unid&sem=211'>2nd Semester Weekly</a>";$datashow3w=1;}
+		if($pre3w==0){ $p3ww="<a class='bttn' href='add.php?student_id=$student_id&unid=$unid&sem=211'>2nd Semester Weekly</a>";$datashow3w=1;}
 
-		else{$p3ww="<a class='bttn' style='background:green;' href='result_edit.php?unid=$unid&sem=211' target='_blank' title='Edit Result'>2nd Semester Weekly</a>";$datashow3w=0;}
+		else{$p3ww="<a class='btn-success'  href='result_edit.php?student_id=$student_id&unid=$unid&sem=211' target='_blank' title='Edit Result'>2nd Semester Weekly</a>";$datashow3w=0;}
 
 		
 
 		$pre3= mysqli_num_rows(mysqli_query($new,"SELECT * FROM marksheed_2019 where regid=$unid and type=201"));
 
-		if($pre3==0){ $p3="<a class='bttn' href='add.php?unid=$unid&sem=201'>2nd Pre Semester</a>";$datashow3=1;}
+		if($pre3==0){ $p3="<a class='btn btn-info w-100 mt-2' href='add.php?student_id=$student_id&unid=$unid&sem=201'>2nd Pre Semester</a>";$datashow3=1;}
 
-		else{$p3="<a class='bttn' style='background:green;' href='result_edit.php?unid=$unid&sem=201' target='_blank' title='Edit Result'>2nd Pre Semester</a>";$datashow3=0;}
+		else{$p3="<a class='btn btn-success w-100 mt-2'  href='result_edit.php?student_id=$student_id&unid=$unid&sem=201' target='_blank' title='Edit Result'>2nd Pre Semester</a>";$datashow3=0;}
 
 		
 
 		$pre4= mysqli_num_rows(mysqli_query($new,"SELECT * FROM marksheed_2019 where regid=$unid and type=200"));
 
-		if($pre4==0){ $p4="<a class='bttn' href='add.php?unid=$unid&sem=200'>2nd Semester</a>";$datashow4=1;}
+		if($pre4==0){ $p4="<a class='btn btn-info w-100 mt-2' href='add.php?student_id=$student_id&unid=$unid&sem=200'>2nd Semester</a>";$datashow4=1;}
 
-		else{$p4="<a class='bttn' style='background:green;' href='result_edit.php?unid=$unid&sem=200' target='_blank' title='Edit Result'>2nd Semester</a>";$datashow4=0;}
+		else{$p4="<a class='btn btn-success w-100 mt-2'  href='result_edit.php?student_id=$student_id&unid=$unid&sem=200' target='_blank' title='Edit Result'>2nd Semester</a>";$datashow4=0;}
 
 		
 
 		$pre5w= mysqli_num_rows(mysqli_query($new,"SELECT * FROM marksheed_2019 where regid=$unid and type=311"));
 
-		if($pre5w==0){ $p5w="<a class='bttn' href='add.php?unid=$unid&sem=311'>3rd Semester Weekly</a>";$datashow5w=1;}
+		if($pre5w==0){ $p5w="<a class='bttn' href='add.php?student_id=$student_id&unid=$unid&sem=311'>3rd Semester Weekly</a>";$datashow5w=1;}
 
-		else{$p5w="<a class='bttn' style='background:green;' href='result_edit.php?unid=$unid&sem=311' target='_blank' title='Edit Result'>3rd Semester Weekly</a>";$datashow5w=0;}
+		else{$p5w="<a class='btn btn-success'  href='result_edit.php?student_id=$student_id&unid=$unid&sem=311' target='_blank' title='Edit Result'>3rd Semester Weekly</a>";$datashow5w=0;}
 
 		
 
 		$pre6= mysqli_num_rows(mysqli_query($new,"SELECT * FROM marksheed_2019 where regid=$unid and type=301"));
 
-		if($pre6==0){ $p6="<a class='bttn' href='add.php?unid=$unid&sem=301'>3rd Pre Semester</a>";$datashow6=1;}
+		if($pre6==0){ $p6="<a class='btn btn-info w-100 pt-2' href='add.php?student_id=$student_id&unid=$unid&sem=301'>3rd Pre Semester</a>";$datashow6=1;}
 
-		else{$p6="<a class='bttn' style='background:green;' href='result_edit.php?unid=$unid&sem=301' target='_blank' title='Edit Result'>3rd Pre Semester</a>";$datashow6=0;}
+		else{$p6="<a class='btn btn-success w-100 pt-2'  href='result_edit.php?student_id=$student_id&unid=$unid&sem=301' target='_blank' title='Edit Result'>3rd Pre Semester</a>";$datashow6=0;}
 
 
 
 		$pre5= mysqli_num_rows(mysqli_query($new,"SELECT * FROM marksheed_2019 where regid=$unid and type=300"));
 
-		if($pre5==0){ $p5="<a class='bttn' href='add.php?unid=$unid&sem=300'>3rd Semester</a>";$datashow5=1;}
+		if($pre5==0){ $p5="<a class='btn btn-info w-100 mt-2' href='add.php?student_id=$student_id&unid=$unid&sem=300'>3rd Semester</a>";$datashow5=1;}
 
-		else{$p5="<a class='bttn' style='background:green;' href='result_edit.php?unid=$unid&sem=300' target='_blank' title='Edit Result'>3rd Semester</a>";$datashow5=0;}
+		else{$p5="<a class='btn btn-success w-100 mt-2' href='result_edit.php?student_id=$student_id&unid=$unid&sem=300' target='_blank' title='Edit Result'>3rd Semester</a>";$datashow5=0;}
 
 		
 
@@ -269,7 +269,7 @@ $ac
 
 						alert('Error try Correctly!!');
 
-						window.location.href = 'add.php?unid=$unid&sem=$seme';
+						window.location.href = 'add.php?student_id=$student_id&unid=$unid&sem=$seme';
 
 							
 
@@ -283,7 +283,7 @@ $ac
 
 						alert('Successfully Added!!');
 
-						window.location.href = 'add.php?unid=$unid&sem=$seme';
+						window.location.href = 'add.php?student_id=$student_id&unid=$unid&sem=$seme';
 
 							
 
@@ -391,7 +391,7 @@ $ac
 
 			}else {
 
-			$ttd.= "<a class='btn btn-info w-100 m-1 text-left' href='add.php?unid=$su&sem=$seme'>$class_roll- $sn </a>";
+			$ttd.= "<a class='btn btn-info w-100 m-1 text-left' href='add.php?student_id=$student_id&student_id=$student_id&unid=$su&sem=$seme'>$class_roll- $sn </a>";
 
 			}
 
@@ -399,8 +399,7 @@ $ac
 
 		}
 
-		$tablea= "<div class='bg-light w-100 p-2 font-weight-bold '>Same Class of $name</div><br />
-    $ttd";
+		$tablea= "";
 
 		echo"<script type='text/javascript'>
 
@@ -438,14 +437,14 @@ $ac
                 <a class="btn btn-info w-100" href="../index.php">Home</a>
                 <a href="index.php" class="btn btn-info w-100 mt-2">Result</a>
             </div>
+            <br />
+            <div class='bg-light w-100 p-2 font-weight-bold '>Same Class of <?php echo $resultObj->student_view()->name;?></div>
 
             <br />
-
-            <?php echo $tablea;?>
-
+            <?php echo $ttd;?>
         </div>
 
-        <div class="col-md-10">
+        <div class="col-md-8    ">
 
                  <?php echo $msg;?>
 
@@ -466,31 +465,34 @@ $ac
 
 
 
-            <form action="add.php?unid=<?php echo "$unid&sem=$seme";?>" method="POST">
+            <form action="add.php?student_id=<?php echo $student_id;?>&unid=<?php echo "$unid&sem=$seme";?>" method="POST">
                 <?php echo $ac;?>
             </form>
-
-
-
-
-
-
-
-
-
         </div>
-
         <div class="col-md-2">
-        <?php
-                echo $p1;
-                echo $p2;
-                echo $p3;
-                echo $p4;
-                echo $p6;
-                echo $p5;
-        ?>
+            <?php
+
+
+            echo $p1;
+
+
+
+
+
+            echo $p2;
+            echo $p3;
+            echo $p4;
+            echo $p6;
+            echo $p5;
+            ?>
         </div>
+
+
+
     </div>
+
+
+
 </body>
 
 </html>
