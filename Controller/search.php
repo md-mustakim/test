@@ -14,6 +14,9 @@ require "../model/Config.php";
          $this->student =new student($this->con->dbconnect());
          $this->class = new Class_list($this->con->dbconnect());
      }
+     public function classAndShift($classId){
+         return $this->class->classAndShiftName($classId);
+     }
 
      public function liveSearch()
      {

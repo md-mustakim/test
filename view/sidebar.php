@@ -12,7 +12,7 @@
                     <li class="list-group-item bg-secondary m-pointer"> <a href="new_student.php" class="text-decoration-none text-light">Add Student</a> </li>
                     <li class="list-group-item bg-secondary m-pointer"> <a href="search.php" class="text-decoration-none text-light">Search Student</a> </li>
                     <li class="list-group-item bg-secondary m-pointer"> <a href="search_by_class.php" class="text-decoration-none text-light">Search By Class</a> </li>
-                    <li class="list-group-item bg-secondary m-pointer"> <a href="" class="text-decoration-none text-light">Student Attendance</a> </li>
+                    <li class="list-group-item bg-secondary m-pointer"> <a href="attandance/" class="text-decoration-none text-light">Student Attendance</a> </li>
                 </ul>
             </div>
 
@@ -23,9 +23,9 @@
 
             <div class="collapse text-light p-0 m-0 text-light" id="result">
                 <ul class="list-group list-group-flush p-0 m-0">
-                    <li class="list-group-item bg-secondary m-pointer"> <a href="result/second_index.php?semester=1" class="text-decoration-none text-light">1st Semester</a> </li>
-                    <li class="list-group-item bg-secondary m-pointer"> <a href="result/second_index.php?semester=2" class="text-decoration-none text-light">2nd Semester</a> </li>
-                    <li class="list-group-item bg-secondary m-pointer"> <a href="result/second_index.php?semester=3" class="text-decoration-none text-light">2nd Semester</a> </li>
+                    <li class="list-group-item bg-secondary m-pointer"> <a href="result/second_index.php?semester=1&class=1" class="text-decoration-none text-light">1st Semester</a> </li>
+                    <li class="list-group-item bg-secondary m-pointer"> <a href="result/second_index.php?semester=2&class=1" class="text-decoration-none text-light">2nd Semester</a> </li>
+                    <li class="list-group-item bg-secondary m-pointer"> <a href="result/second_index.php?semester=3&class=1" class="text-decoration-none text-light">2nd Semester</a> </li>
                 </ul>
             </div>
 

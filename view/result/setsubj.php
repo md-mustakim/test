@@ -1,13 +1,13 @@
 <?php
 	session_start();
-	if(!isset($_SESSION['uname']))
+	if(!isset($_SESSION['admin']))
 	{
 		header("location:../index.php");
 	}
 	else
 	{
-		include'../db.php';
-		include'../function_list.php';
+		include'../../db.php';
+		include'../../function_list.php';
 		$outv="";
 		$msg="";
 		$subject_row="";
@@ -195,26 +195,28 @@
 	<meta charset="UTF-8">
 	<title>Subject Costomize</title>
 	<link rel="icon" href="../img/icon.ico" />
-	<link rel="stylesheet" href="../style.css" />
-	<link rel="stylesheet" href="../style_1.css" />
+	<link rel="stylesheet" href="../../src/fa/css/all.css" />
+	<link rel="stylesheet" href="../../src/bootstrap/css/bootstrap.min.css" />
 </head>
 <body>
 	<?php include"../header.php";?>
-	<div class="column1">
-	<div style='background:green;padding:3px;'>
-	<a style='color:white' href="../index.php">Home</a>
-		<div id="i" class="right_change"></div> 
-	<a href="index.php" style='color:white'>Result</a>
-		<div id="i" class="right_change"></div> 	
-	</div>
-	<?php echo $subject_view;?>
-	<form action="setsubj.php" method="POST">
-		<input style="width:90%;" type="text" name="sub_name"/>
-		<input type="submit" name="sub_submit" value="Add Subject"/>
-	</form></div>
-	<div class="column2">
+    <div class="row m-0 p-0">
+	    <div class="col-md-2">
+            <div>
+                <a class="btn btn-info w-100 p-2 mt-2" href="../index.php">Home</a>
+                    <div id="i" class="right_change"></div>
+                <a href="index.php" style='color:white'>Result</a>
+                <div id="i" class="right_change"></div>
+            </div>
+            <?php echo $subject_view;?>
+            <form action="setsubj.php" method="POST">
+                <input style="width:90%;" type="text" name="sub_name"/>
+                <input type="submit" name="sub_submit" value="Add Subject"/>
+            </form>
+        </div>
+	<div class="col-md-8">
 	<?php echo $msg;?>		
-	<table><?php echo $view;?>		</table>
+	<table class="table table-bordered table-hover table-sm"><?php echo $view;?>		</table>
 	<form action="setsubj.php<?php echo $setsss;?>" method="POST">
 			Select class:			
 			<?php echo $coption;?>
@@ -241,9 +243,10 @@
 		
 	
 	</div>
-	<div class="column3">
+	<div class="col-md-2">
 	Selected: <u><b><?php echo $classaccess;?></b></u>	
 		<?php echo $outclass;?>
 	</div>
+    </div>
 </body>
 </html>

@@ -3,7 +3,6 @@
     $tstart = microtime(true);
     require "Controller/dashboard.php";
     $dc = new dashboard();
-
 ?>
 
 <!DOCTYPE HTML>

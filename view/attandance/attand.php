@@ -1,7 +1,7 @@
 <?php
 	session_start();
-	require "../../Controller/attendance.php";
-	$attendance = new attendance();
+	require "../../Controller/attendanceController.php";
+	$attendance = new attendanceController();
 
 	date_default_timezone_set('Asia/Dhaka');
 
@@ -10,12 +10,22 @@
 		$class= $_GET['class'];
 	}
 	else {header('location:index.php');}
-	
 
-	
 
-	
-	
+
+    $attendance->class          = $_GET['class'];
+    $attendance->date           = date('d');
+    $attendance->month          = date('m');
+    $attendance->year           = date('Y');
+
+    if(isset($_POST['submit']))
+    {
+        $attendance->attend_data    = $_POST['attand'];
+
+        var_dump($attendance->takeAttendance());
+    }
+
+
 ?>
 <!DOCTYPE HTML>
 <html lang="en-US">
@@ -44,17 +54,27 @@
             <?php } ?>
         </div>
         <div class="col-md-10">
-            <table class="table ">
+            <?php if($attendance->attend_status() === false){ echo "Attendance Already taken"; }else{ ?>
+            <form action="attand.php?class=<?php echo $_GET['class'];?>" method="post">
+            <table class="table table-sm table-hover table-bordered">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Name</th>
+                        <th>Roll</th>
+                        <th>Present</th>
+                        <th>Absent</th>
+                    </tr>
+                </thead>
             <?php $attendance->class = $_GET['class'];
             foreach ($attendance->attendList() as $key => $value){ $obj = (object)$value; ?>
 
                     <tr>
                         <td> <?php echo $obj->name; ?> </td>
                         <td> <?php echo $obj->class_roll; ?> </td>
-                        <td> <label for="present['<?php echo $obj->id;?>']">Present</label>
-                            <input  id="present['<?php echo $obj->id;?>']" type="radio" name="attand['<?php echo $obj->id;?>']" value="1">  </td>
-                        <td> <label for="absent['<?php echo $obj->id;?>']">Absent</label>
-                                <input type="radio" id="absent['<?php echo $obj->id;?>']" name="attand['<?php echo $obj->id;?>']" value="0"> </td>
+                        <td> <label for="present[<?php echo $obj->id;?>]">Present</label>
+                            <input  id="present[<?php echo $obj->id;?>]" type="radio" name="attand[<?php echo $obj->id;?>]" value="1" checked>  </td>
+                        <td> <label for="absent[<?php echo $obj->id;?>]">Absent</label>
+                                <input type="radio" id="absent[<?php echo $obj->id;?>]" name="attand[<?php echo $obj->id;?>]" value="0"> </td>
 
                     </tr>
 
@@ -65,12 +85,15 @@
 
 
             </table>
-
-
+                <input type="submit" name="submit" value="Submit" class="btn btn-success"/>
+            </form>
+            <?php } ?>
         </div>
 	</div>
 
+<script>
 
+</script>
 
 </body>
 </html>

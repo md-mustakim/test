@@ -20,6 +20,11 @@
             return $stm->fetchAll();
 
         }
+        public function class_count()
+        {
+            $this->all_class();
+            return $this->allClassCount;
+        }
 
         public function shift_name($shfit_id)
         {
@@ -37,7 +42,7 @@
 
         }
 
-        public function class_shift()
+        public function class_shift() // view all class and shift
         {
             $q = "select * from ".$this->table;
             $stm = $this->connect->prepare($q);
@@ -66,11 +71,18 @@
             $result = $stmt->fetch();
             $data = array();
             $shift_name = $this->shift_name($result['shift'])['shift_name'];
-            $data = [
-                'class_name' => $result['class_name'],
-                'shift' => $shift_name
-            ];
-            return $data;
+            if($shift_name == null)
+            {
+                return $data;
+            }else
+            {$shift_name = $this->shift_name($result['shift'])['shift_name'];
+                $data = [
+                    'class_name' => $result['class_name'],
+                    'shift' => $shift_name
+                ];
+                return $data;
+            }
+
         }
     }
 

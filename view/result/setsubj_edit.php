@@ -1,6 +1,6 @@
 <?php
-	include"../db.php";
-	include"../function_list.php";
+	include"../../db.php";
+	include"../../function_list.php";
 	
 	if(!isset($_GET['classid']))
 	{
@@ -38,7 +38,7 @@
 					</form></td>
 				</tr>";
 			}
-			$view = "<table><tr>
+			$view = "<table class='table table-sm table-hover table-bordered'><tr>
 				<th>Class</th>
 				<th>Subject</th>
 				<th>Full Marks</th>
@@ -63,12 +63,13 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Edit Subject</title>
-	<link rel="stylesheet" href="../style.css" />
-	<link rel="stylesheet" href="../style_1.css" />
+	<link rel="stylesheet" href="../../src/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="../../src/bootstrap/css/bootstrap.min.css" />
 </head>
 <body>
-<?php include"../headerhome.php";?>
-	<div class="column1">
+<?php include"../header.php";?>
+    <div class="row m-0 p-0">
+	<div class="col-md-2">
 		<div style='background:green;padding:3px;'>
 	<a style='color:white' href="../index.php">Home</a>
 		<div id="i" class="right_change"></div> 
@@ -76,10 +77,11 @@
 		<div id="i" class="right_change"></div> 	
 	</div>
 	</div>
-	<div class="column2">		
+	<div class="col-md-8">
 			<?php echo $msg;?>	
 			<?php echo $view;?>	
 	</div>
-	<div class="column3"></div>
+	<div class="col-md-2"></div>
+    </div>
 </body>
 </html>

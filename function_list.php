@@ -96,10 +96,10 @@
 	
 	
 	
-//-------------attendance validity-----------------
+//-------------attendanceController validity-----------------
 		function attand_validity($a,$b) {
-	include "db.php";
-		$class_attand= mysqli_num_rows(mysqli_query($new,"SELECT * FROM attendance where cls=$a and date like '%".$b."%'"));
+	    include "db.php";
+		$class_attand= mysqli_num_rows(mysqli_query($new,"SELECT * FROM attandance where cls=$a and date like '%".$b."%'"));
 		$class_total= mysqli_num_rows(mysqli_query($new,"SELECT * FROM student_info where class=$a and status=1"));
 
 		if($class_total==0)
@@ -346,8 +346,8 @@ function get_number($cls){
 		$dat = date('d-m-y');	
 		$date= "$dat-Morning";
 		$total_student_active= mysqli_num_rows(mysqli_query($new,"SELECT * FROM student_info where status=1"));
-		$today_present=mysqli_num_rows(mysqli_query($new,"SELECT * FROM attendance where attand=1 and cls=1 and date date like '%".$date."%'"));
-		$today_absent=mysqli_num_rows(mysqli_query($new,"SELECT * FROM attendance where attand=0 and cls=$input and date like '.%".$date."%.'"));
+		$today_present=mysqli_num_rows(mysqli_query($new,"SELECT * FROM attendanceController where attand=1 and cls=1 and date date like '%".$date."%'"));
+		$today_absent=mysqli_num_rows(mysqli_query($new,"SELECT * FROM attendanceController where attand=0 and cls=$input and date like '.%".$date."%.'"));
 		
 			$return = ($today_present * 100) / $total_student_active;
 			

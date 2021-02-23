@@ -73,7 +73,7 @@
         }
         public function perClassStudentShow($class_id) // show all student in individual class
         {
-            $q = "select * from ".$this->table." where status=1 and class =".$class_id;
+            $q = "select * from ".$this->table." where status=1 and class =".$class_id." ORDER BY class_roll ASC";
             $stmt = $this->connect->prepare($q);
             $stmt->execute();
             return $stmt->fetchAll();

@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	if(!isset($_SESSION['uname']))
+	if(!isset($_SESSION['admin']))
 	{
 		header("location: ../login.php");
 	}
@@ -20,8 +20,8 @@
 			{
 				
 				
-				include"../db.php";
-				include"../function_list.php";
+				include"../../db.php";
+				include"../../function_list.php";
 				$unid=$_GET['regid'];
 				$type=$_GET['sem'];
 				$msg="";
@@ -42,7 +42,7 @@
 				
 					//------------
 				
-				$semester_postion=serial($student_clas,$student_roll);
+				$semester_postion=serial($student_clas,$student_roll,$type);
 				
 				
 				if($type==1){$semester=100; $pre_semester=101; $weekly=111; $wm='1st semester weekly'; $sm='1st Semester'; $p_sm='1st Pre Semester';}
@@ -64,6 +64,8 @@
 					$p_w= mysqli_fetch_assoc(mysqli_query($new,"SELECT * FROM marksheed_2019 where subject_id=$subjid and regid=$unid and type=$weekly"));
 					$p_m= mysqli_fetch_assoc(mysqli_query($new,"SELECT * FROM marksheed_2019 where subject_id=$subjid and regid=$unid and type=$pre_semester"));
 					$s_m= mysqli_fetch_assoc(mysqli_query($new,"SELECT * FROM marksheed_2019 where subject_id=$subjid and regid=$unid and type=$semester"));
+					
+					echo "<br>";
 					$weekly_semester_marks= $p_w['marks'];
 					$pre_semester_marks= $p_m['marks'];
 					$semester_marks= $s_m['marks'];
@@ -106,7 +108,7 @@
 				
 				
 					$table="<h2 align='center'><b><u>$sm Result Sheet- 2019</u></b></h2><br />
-				 <table id='tablea'>
+				 <table id='tablea' class='table table-sm table-bordered'>
 				 <tr>
 					<td class='w-25' style='border-right:1px solid #0000003d;'>Name </td>
 					<td class='w-25' colspan='3'>$student_name</td>
@@ -130,7 +132,7 @@
 				 
 					
 					
-					<table>
+					<table class='table table-sm'>
 						<tr>
 						<th>Subject</th>						
 						<th>$p_sm (50) </th>
@@ -205,8 +207,8 @@
 	
 	<meta charset="UTF-8">
 	<title>Marksheet of <?php echo $student_name;?></title>
-	<link rel="stylesheet" href="../style.css" />
-	<link rel="stylesheet" href="../style_1.css" />
+	<link rel="stylesheet" href="../../src/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="../../src/fa/css/all.css" />
 	<link rel="x-icon" href="../" />
 	<style type="text/css">
 	w-25{width:25%;}
@@ -266,9 +268,7 @@
 </head>
 
 	<div align='center' >
-	
-		<div class='pp'>
-			
+		<div class=''>
 				<div  class='lc1 pm-0'>
 					<img src="../img/logo.png" alt="" width="90px" heigth="90px" />
 				</div>
@@ -286,7 +286,47 @@
 		<br />
 		<br />
 		<?php echo $msg;?>
-		<?php echo $table;?>
+        <h2 align='center'><b><u><?php echo $sm;?> Result Sheet- 2019</u></b></h2><br />
+        <table id='tablea' class='table table-sm table-bordered'>
+            <tr>
+                <td class='w-25' style='border-right:1px solid #0000003d;'>Name </td>
+                <td class='w-25' colspan='3'><?php echo $student_name;?></td>
+            </tr>
+            <tr>
+                <td class='w-25' style='border-right:1px solid #0000003d;'>Class </td>
+                <td class='w-25' style='border-right:1px solid #0000003d;'><?php echo $student_class?></td>
+                <td class='w-25' style='border-right:1px solid #0000003d;'>Roll </td>
+                <td class='w-25' style='border-right:1px solid #0000003d;'><?php echo $student_roll;?></td>
+            </tr>
+
+            <tr>
+                <td style='border-right:1px solid #0000003d;'>Position</td>
+                <td style='border-right:1px solid #0000003d;'><?php echo $semester_postion;?></td>
+                <td style='border-right:1px solid #0000003d;'>Total Marks</td>
+                <td style='border-right:1px solid #0000003d;'><?php echo $grandtotal;?></td>
+
+            </tr>
+
+        </table> <br />
+
+
+
+        <table class='table table-sm'>
+            <tr>
+                <th>Subject</th>
+                <th><?php echo $p_sm;?> (50) </th>
+                <th><?php echo $sm;?> (100) </th>
+                <th>Total (150) </th>
+                <?php echo $tr;?>
+            <tr>
+                <td>Grand Total</td>
+                <td></td><td align='center'></td>
+                <td align='center'><?php echo $grand_total_marks;?></td>
+
+
+            </tr>
+            </tr>
+        </table>
 	</div>
 	
 	
@@ -294,7 +334,7 @@
 <div class='print' ><br />
 <div  align='left' style='width:30%;float:left;margin:0;padding:0;outline:0;'>
 		
-	<p>Result is available in our website:  https://www.holycareschool.xyz</p>
+	<p>Result is available in our website:  https://www.holycareschool.com</p>
 	<br />
 </div>
 	<div  align='right' style='float:left;width:70%;margin:0;padding:0;outline:0;'>

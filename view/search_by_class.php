@@ -35,10 +35,20 @@ $search = new search();
 
 
     </div>
-    <div class="col-md-10">
+    <div class="col-md-10" id="printArea">
         <div class="bg-light mt-3 p-3">
             <div class="h3">
-                Search Student by Class
+                <?php
+                    if(isset($_GET['class_id']))
+                    {
+                        $classData = $search->classAndShift($_GET['class_id']);
+                        echo "<b>".$classData['class_name']."&nbsp;</b>";
+                        echo "(<small>".$classData['shift']."</small>)";
+                    }else{
+                        echo "Search Student By Class";
+                    }
+                    ?>
+                <span class="float-right" onclick="myPrint()"> <i class="fa fa-print"></i> </span>
                 <hr>
             </div>
 
@@ -83,5 +93,22 @@ $search = new search();
 
 
 <script>
+    function myPrint(){
+        let printArea = document.getElementById("printArea");
+        let myWindow = window.open('', 'PRINT', 'height=400,width=600');
 
+        myWindow.document.write('<html><head>   <link rel="stylesheet" href="../src/bootstrap.min.css"><title>' + document.title  + '</title>');
+        myWindow.document.write('</head><body >');
+        myWindow.document.write('<h1>' + document.title  + '</h1>');
+        myWindow.document.write(printArea.innerHTML);
+        myWindow.document.write('</body></html>');
+
+        myWindow.document.close(); // necessary for IE >= 10
+        myWindow.focus(); // necessary for IE >= 10*/
+
+        myWindow.print();
+
+
+
+    }
 </script>

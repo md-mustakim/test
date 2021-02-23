@@ -38,7 +38,7 @@ $refresh= "<script type='text/javascript'>
 	
 	
 	$select_absent_student= mysqli_query($new,"SELECT * FROM `student_info`
-												LEFT JOIN attendance ON student_info.uniqueid=attendance.unid
+												LEFT JOIN attendanceController ON student_info.uniqueid=attendanceController.unid
 												WHERE `date` LIKE '%".$date."%' and `shift` LIKE '%".$sift."%' and attand=0");
 	$count=mysqli_num_rows($select_absent_student);
 			if($count>0)
