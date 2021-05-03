@@ -157,29 +157,18 @@ class function_list{
     }
 
 //--------------total student---------------------------
-include ("db.php");
-$qr= mysqli_query($new,"SELECT * FROM student_info");
-$total_student = mysqli_num_rows($qr);
-$total_student="Total Student: $total_student";
+
+
 
 
     //------------check valid phone number-------------
 
-    function studentc($a)
-    {
-        include ("db.php");
-        if($a>0){
-            $line= "class=$a and";} else{$line="";}
-        $c= mysqli_num_rows(mysqli_query($new,"SELECT * FROM student_info where $line status=1"));
-        return $c;
-    }
+
     function change_teacher($input)
     {
         include ("db.php");
         $qr= mysqli_fetch_assoc(mysqli_query($new,"SELECT * FROM teacher_info where id=$input"));
         return $qr['name'];
-
-
     }
     function change_subject($input)
     {

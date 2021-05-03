@@ -5,7 +5,6 @@ use Controller\dashboard;
 $tStart = microtime(true);
     include "../vendor/autoload.php";
     include "auth/session.php";
-    require "../Controller/dashboard.php";
     $dc = new dashboard();
 ?>
 

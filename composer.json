@@ -10,10 +10,7 @@
     "psr-4": {
       "Controller\\": "Controller",
       "Model\\": "model"
-    },
-    "files": [
-      "function_list.php"
-    ]
+    }
   },
   "name": "app/v2",
   "description": "Holy Care Management App"

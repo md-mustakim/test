@@ -1,9 +1,7 @@
 <?php
-    require "../../Controller/payment.php";
+    require "../../vendor/autoload.php";
+    use Controller\payment;
 	date_default_timezone_set('Asia/Dhaka');
-
-	include"../../function_list.php";
-	include"../../db.php";
 	session_start();
 	$admin= $_SESSION['admin'];
 	$time=  date('g:i a, d/m/y');
