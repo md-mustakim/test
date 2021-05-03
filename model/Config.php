@@ -1,16 +1,15 @@
 <?php
-    class config{
-        private $db;
+namespace Model;
+use PDO;
+use PDOException;
+    class Config{
+        public PDO $connection;
+        public PDOException $PDOException;
+
         public function __construct()
         {
             $this->connect();
         }
-
-        public function dbconnect()
-        {
-            return $this->db;
-        }
-
         public function connect()
         {
             try {
@@ -19,29 +18,21 @@
                  $user = "root";
                  $pass = "";
                  $db = "holycare_app";
-				
-               // $host = "localhost";
-              //  $user = "holycare_info";
-              //  $pass = "holycare_info_29";
-              //  $db = "holycare_app";
+
 
                 $options = [
-                    \PDO::ATTR_ERRMODE            => \PDO::ERRMODE_EXCEPTION,
-                    \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,
-                    \PDO::ATTR_EMULATE_PREPARES   => false,
+                    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                    PDO::ATTR_EMULATE_PREPARES   => false,
                 ];
 
-                $con = new PDO("mysql:host=$host;dbname=$db;charset=utf8",$user,$pass,$options);
+                $connect = new PDO("mysql:host=$host;dbname=$db;charset=utf8",$user,$pass,$options);
+                $this->connection = $connect;
 
-
-
-
-                $this->db = $con;
-
-            }catch (PDOException $exception)
+            }catch (PDOException $PDOException)
             {
-                echo "Connection Failed".$exception->getMessage();
-                $this->db = null;
+                echo "Connection Failed".$PDOException;
+                $this->PDOException = $PDOException;
             }
             
 

@@ -1,11 +1,11 @@
 <?php
-    require "Config.php";
-    $con = new config();
+    namespace Model;
+    use PDO;
     class user{
-        public $user;
-        public $pass;
-        public $conn;
-        public $connect_id;
+        public string $user;
+        public string $pass;
+        public PDO $conn;
+        public string $connect_id;
 
         public function __construct($con)
         {
@@ -14,7 +14,7 @@
 
         }
 
-        public function login()
+        public function login(): bool|string
         {
             $q = "select * from teacher_info where `number` = '".$this->user."'";
             $stmt = $this->conn->prepare($q);
@@ -67,19 +67,9 @@
 
         }
 
-        public function validator($token){
-            try {
 
-            }catch (Exception $exception){
-                return array(
-                    'status' => 0,
-                    'message'=> $exception->getMessage()
-                );
-            }
 
-        }
-
-        public function get_permission($user_id){
+        public function get_permission(int $user_id){
             $q = "select * from teacher_info where id= ?";
             $stmt = $this->conn->prepare($q);
             $stmt->execute([$user_id]);

@@ -1,37 +1,24 @@
 <?php
-    require "../model/Config.php";
-    require "../model/Student.php";
-    require "../model/Class_list.php";
+    namespace Controller;
+    use Model\Student;
+    use Model\Class_list;
 
 
 
     class dashboard{
-        private $student;
-        private $class_list;
 
-
-
-        public function __construct()
+        public function classView(): array
         {
-            $connect = new config();
-            $con = $connect->dbconnect();
+            $class_list = new Class_list();
+            $student = new Student();
 
-            $this->student = new student($con);
-            $this->class_list = new Class_list($con);
-
-        }
-
-
-        public function classView()
-        {
-
-            foreach ($this->class_list->all_class() as $item => $value)
+            foreach ($class_list->all_class()['data'] as $item => $value)
             {
-                $classid = $value['class_id'];
+                $classId = $value['class_id'];
                 $class_name = $value['class_name'];
-                $shift = $this->class_list->shift_name($value['shift']);
-                $classperstudent = $this->student->perClassStudent($classid);
-                $ap[] = array($class_name, $shift['shift_name'], $classperstudent);
+                $shift = $class_list->shift_name($value['shift']);
+                $classPerStudent = $student->perClassStudent($classId);
+                $ap[] = array($class_name, $shift['shift_name'], $classPerStudent);
                 ;
             }
             return $ap;

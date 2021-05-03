@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d786c4a87471fc49ac50a18ec3678cbe",
+    "content-hash": "158df97771824e0d651e98b3419692c6",
     "packages": [
         {
             "name": "twbs/bootstrap",
@@ -55,6 +55,10 @@
                 "sass",
                 "web"
             ],
+            "support": {
+                "issues": "https://github.com/twbs/bootstrap/issues",
+                "source": "https://github.com/twbs/bootstrap/tree/v4.4.1"
+            },
             "time": "2019-11-28T12:59:49+00:00"
         }
     ],
@@ -64,6 +68,12 @@
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
-    "platform-dev": []
+    "platform": {
+        "ext-pdo": "*",
+        "ext-mysqli": "*",
+        "ext-json": "*",
+        "ext-calendar": "*"
+    },
+    "platform-dev": [],
+    "plugin-api-version": "2.0.0"
 }

@@ -1,10 +1,10 @@
 <?php
-include "auth/session.php";
-include "../Controller/search.php";
+include "../vendor/autoload.php";
+use Controller\search;
 $search = new search();
 
 ?>
-<html>
+<html lang="en">
 <head>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -97,7 +97,7 @@ $search = new search();
         let printArea = document.getElementById("printArea");
         let myWindow = window.open('', 'PRINT', 'height=400,width=600');
 
-        myWindow.document.write('<html><head>   <link rel="stylesheet" href="../src/bootstrap.min.css"><title>' + document.title  + '</title>');
+        myWindow.document.write('<html lang="en"><head>   <link rel="stylesheet" href="../src/bootstrap.min.css"><title>' + document.title  + '</title>');
         myWindow.document.write('</head><body >');
         myWindow.document.write('<h1>' + document.title  + '</h1>');
         myWindow.document.write(printArea.innerHTML);

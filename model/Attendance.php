@@ -1,7 +1,10 @@
 <?php
+namespace Model;
+use PDO;
+use PDOException;
 class Attendance{
     private $table = "attandance";
-    private $connect;
+    private PDO $connect;
     public $id;
     public $unique_id;
     public $student_name;
@@ -17,9 +20,10 @@ class Attendance{
     public $send_sms_status;
     public $image_path;
     public $amount;
-    public function __construct($connect)
+    public function __construct()
     {
-        $this->connect = $connect;
+
+        $this->connect = (new Config())->connection;
     }
 
     public function show_attendance_by_date($date,$month,$year,$class)

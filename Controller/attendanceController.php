@@ -1,32 +1,40 @@
 <?php
+    namespace Controller;
     require __DIR__."/../model/Student.php";
     require __DIR__."/../model/Class_list.php";
     require __DIR__."/../model/Config.php";
     require __DIR__."/../model/Attendance.php";
+    use PDO;
+    use PDOException;
+    use Model\Student;
+    use Model\Class_list;
+    use Model\Config;
+    use Model\Attendance;
     class attendanceController{
         private $student;
 
-        private $class_list;
-        private $connect;
-        public $date;
-        public $month;
-        public $year;
-        public $count;
-        public $class;
-        public $attend_data;
-        public $attendance;
+        private Class_list $class_list;
+        private PDO $connect;
+        public string $date;
+        public string $month;
+        public string $year;
+        public string $count;
+        public int $class;
+        public array $attend_data;
+        public Attendance $attendance;
 
 
         public function __construct()
         {
             $co = new config();
-            $this->connect =  $co->dbconnect();
-            $this->student = new student($this->connect);
-            $this->class_list = new Class_list($this->connect);
-            $this->attendance = new Attendance($this->connect);
+            $this->connect =  (new Config())->connection;
+            $this->student = new student();
+            $this->class_list = new Class_list();
+            $this->attendance = new Attendance();
 
         }
-        public function attend_status(){
+        public function attend_status(): bool
+        {
             return $this->attendance->status($this->date,$this->month,$this->year,$this->class);
         }
 
@@ -58,8 +66,8 @@
                     );
                 }else
                 {
-                    $this->student->all_student();
-                    $attend_percent = number_format(($count_attend*100) / $this->student->allStudentCount,2);
+                    $this->student->allStudent();
+                    $attend_percent = number_format(($count_attend*100) / $this->student->allStudent()['count'],2);
                     $count_class_q = "SELECT DISTINCT cls FROM attandance WHERE month = ".$this->month." AND year=".$this->year. " ORDER BY cls ASC";
                     $stmt  = $this->connect->prepare($count_class_q);
                     $stmt->execute();
@@ -78,7 +86,7 @@
                         'date' => $this->date,
                         'month' => $this->month,
                         'year' => $this->year,
-                        'count_class' => $class_count." Out of ".$this->class_list->class_count(),
+                        'count_class' => $class_count." Out of ".$this->class_list->all_class()['count'],
                         'percent' => $attend_percent
                     );
 
@@ -177,12 +185,12 @@
         {
             if(isset($class_id))
             {
-                $this->student->all_student();
-                return $this->student->allStudentCount;
+                $this->student->allStudent();
+                return $this->student->allStudent()['count'];
 
             }else{
-                $this->student->show_studentByclass($class_id);
-                return $this->student->allStudentCount;
+                $this->student->showStudentByClass($class_id);
+                return $this->student->allStudent()['count'];
             }
 
         }
@@ -197,7 +205,7 @@
               attandance.date LIKE '".$this->date."'";
             $stmt = $this->connect->prepare($q);
             $result = $stmt->execute();
-             if($result->rowCount() > 0)
+             if($stmt->rowCount() > 0)
              {
                  return false;
              }else
@@ -242,10 +250,10 @@
                 }
                 $this->connect->commit();
                 return true;
-            }catch (Exception $exception)
+            }catch (PDOException $PDOException)
             {
                 $this->connect->rollback();
-                return $exception;
+                return $PDOException;
             }
 
 

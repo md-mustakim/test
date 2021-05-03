@@ -1,9 +1,9 @@
 <?php
     $s = microtime(true);
 	session_start();
-	include('../../db.php');
+	include('../../vendor/autoload.php');
 	include('../../function_list.php');
-	require "../../Controller/attendanceController.php";
+	use Controller\attendanceController;
 	$attendanceObj = new attendanceController();
 	date_default_timezone_set('Asia/Dhaka');
 

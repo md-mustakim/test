@@ -1,52 +1,87 @@
 <?php
-    class student{
-        private $table = "student_info";
-        private $connect;
-        public $id;
-        public $unique_id;
-        public $student_name;
-        public $father_name;
-        public $mother_name;
-        public $father_number;
-        public $mother_number;
-        public $birth_date;
-        public $class;
-        public $class_roll;
-        public $allStudentCount;
-        public $address;
-        public $send_sms_status;
-        public $image_path;
-        public $amount;
-        public function __construct($connect)
+    namespace Model;
+    use PDO;
+    use PDOException;
+    class Student{
+        private PDO $connect;
+        public int $id;
+        public string $unique_id;
+        public string $student_name;
+        public string $father_name;
+        public string $mother_name;
+        public string $father_number;
+        public string $mother_number;
+        public string $birth_date;
+        public string $class;
+        public string $class_roll;
+        public string $address;
+        public string $image_path;
+        public string $amount;
+        public function __construct()
         {
-            $this->connect = $connect;
+            $config = new Config();
+            $this->connect = $config->connection;
         }
 
-        public function all_student()
+        public function allStudent(): array
         {
-            $q = "select * from ".$this->table." where status=1";
-            $stm = $this->connect->prepare($q);
-            $stm->execute();
-            $this->allStudentCount = $stm->rowCount();
-            return $stm->fetchAll();
+            try {
+                $q = "select * from student_info where status = 1";
+                $stm = $this->connect->prepare($q);
+                $stm->execute();
+                return array(
+                    'status' => true,
+                    'count' => $stm->rowCount(),
+                    'data' => $stm->fetchAll()
+
+                );
+            }catch (PDOException $PDOException)
+            {
+                return array(
+                    'status' => false,
+                   'error' => $PDOException
+                );
+            }
         }
-        public function show_studentByclass($class_id)
+        public function showStudentByClass($class_id): array
         {
-            $q = "select * from ".$this->table." where status=1 and class = ".$class_id." ORDER BY class_roll ASC";
-            $stm = $this->connect->prepare($q);
-            $stm->execute();
-            $this->allStudentCount = $stm->rowCount();
-            return $stm->fetchAll();
+            try {
+                $q = "select * from student_info where status=1 and class = ".$class_id;
+                $stm = $this->connect->prepare($q);
+                $stm->execute();
+                return array(
+                    'status' => true,
+                    'count' => $stm->rowCount(),
+                    'data' => $stm->fetchAll()
+                );
+            }catch (PDOException $PDOException)
+            {
+                return array(
+                    'status' => false,
+                    'error' => $PDOException
+                );
+            }
         }
-        public function show($id)
+        public function show($id): array
         {
-            $q = "select * from ".$this->table." where id=$id";
-            $stmt = $this->connect->prepare($q);
-            $stmt->execute();
-            return $stmt->fetch();
+            try {
+                $q = "select * from student_info where id=$id";
+                $stmt = $this->connect->prepare($q);
+                $stmt->execute();
+                return array(
+                    'status' => true,
+                    'data' => $stmt->fetch()
+                );
+            }catch (PDOException $PDOException)
+            {
+                return array(
+                    'status' => false,
+                    'error' => $PDOException
+                );
+            }
         }
 
-        public function makeUniqueId($class)
+        public function makeUniqueId(int $class): string
         {
             $select_id_sql="SELECT * FROM `student_info` ORDER BY `student_info`.`id`  DESC";
             $stmt = $this->connect->prepare($select_id_sql);
@@ -64,52 +99,68 @@
             $build_id           = str_pad($new_id, 5,'0', STR_PAD_LEFT);
            return date('y').$build_class_id.$build_id;
         }
-        public function perClassStudent($class_id) // count
+        public function perClassStudent(int $class_id): int // count
         {
-            $q = "select * from ".$this->table." where status=1 and class =".$class_id;
+            $q = "select * from student_info where status=1 and class =".$class_id;
             $stmt = $this->connect->prepare($q);
             $stmt->execute();
             return $stmt->rowCount();
         }
-        public function perClassStudentShow($class_id) // show all student in individual class
+        public function perClassStudentShow(int $class_id): array // show all student in individual class
         {
-            $q = "select * from ".$this->table." where status=1 and class =".$class_id." ORDER BY class_roll ASC";
-            $stmt = $this->connect->prepare($q);
-            $stmt->execute();
-            return $stmt->fetchAll();
+            try {
+                $q = "select * from student_info where status=1 and class =".$class_id;
+                $stmt = $this->connect->prepare($q);
+                $stmt->execute();
+                return array(
+                    'status' => true,
+                    'count' => $stmt->rowCount(),
+                    'data' => $stmt->fetchAll()
+                );
+            }catch (PDOException $PDOException)
+            {
+                return array(
+                    'status' => false,
+                    'error' => $PDOException
+                );
+            }
         }
 
 
-        public function create()
+        public function create(): array
         {
-            $q= "INSERT INTO `student_info`(`class`, `name`, `fname`, `fnumber`, `mname`, `mnumber`, `birth`, `address`, `amount`, `pic`,`uniqueid`)
+            try {
+                $q= "INSERT INTO `student_info`(`class`, `name`, `fname`, `fnumber`, `mname`, `mnumber`, `birth`, `address`, `amount`, `pic`,`uniqueid`)
 		    VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-            $data = array($this->class,$this->student_name,$this->father_name,$this->father_number,$this->mother_name,$this->mother_number,$this->birth_date,$this->address,$this->amount,$this->image_path,$this->unique_id);
+                $data = array(
+                    $this->class,
+                    $this->student_name,
+                    $this->father_name,
+                    $this->father_number,
+                    $this->mother_name,
+                    $this->mother_number,
+                    $this->birth_date,
+                    $this->address,
+                    $this->amount,
+                    $this->image_path,
+                    $this->unique_id
+                );
 
-            $result = $this->connect->prepare($q)->execute($data);
+                $result = $this->connect->prepare($q)->execute($data);
 
-            return($result);
-
-
-
-
-
-
-
-
-
-
-
-         /*   $message="Congratulations!!!
-            Dear $nm,
-            Your Registration is successfully completed.
-            Thanks
-            Holy Care School";
-
-            $number="$fnum,$mnum";
-            $campagine="Registration";*/
+                if ($result){
+                    return array(
+                        'status' => true
+                    );
+                }else
+                    return array(
+                        'status' => $result
+                    );
+            }catch (PDOException $PDOException){
+                return array(
+                    'status' => false,
+                    'error' => $PDOException
+                );
+            }
         }
-
-
-
     }

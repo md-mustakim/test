@@ -1,32 +1,52 @@
 <?php
+    namespace Model;
+    use PDO;
+    use PDOException;
 class Subject{
-    private $connect;
-    private $table = "subject_list";
-
-
-
+    private PDO $connect;
 
     public function __construct($connect)
     {
         $this->connect = $connect;
     }
 
-    public function all_subject()
+    public function allSubject(): array
     {
-        $q = "select * from ".$this->table;
-        $stm = $this->connect->prepare($q);
-        $stm->execute();
-        $this->allClassCount = $stm->rowCount();
-        return $stm->fetchAll();
+        try {
+            $q = "select * from subject_list";
+            $stm = $this->connect->prepare($q);
+            $stm->execute();
+            return array(
+                'status' => true,
+                'count' => $stm->rowCount(),
+                'data' => $stm->fetchAll(),
+            );
+        }catch (PDOException $PDOException){
+            return array(
+                'status' => true,
+                'error' => $PDOException
+            );
+        }
 
     }
 
-    public function subject_name($subject_id)
+    public function subjectName($subject_id): array
     {
-        $q = "SELECT * FROM ".$this->table." WHERE subject_list_id=".$subject_id;
-        $stmt = $this->connect->prepare($q);
-        $stmt->execute();
-        return (object)$stmt->fetch();
+        try {
+            $q = "SELECT * FROM subject_list WHERE subject_list_id= " .$subject_id;
+            $stmt = $this->connect->prepare($q);
+            $stmt->execute();
+            return array(
+                'status' => true,
+                'count' => $stmt->rowCount(),
+                'data' => $stmt->fetchAll()
+            );
+        }catch (PDOException $PDOException){
+            return array(
+                'status' => true,
+                'error' => $PDOException
+            );
+        }
     }
 
 

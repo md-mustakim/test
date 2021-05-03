@@ -1,5 +1,7 @@
 <?php
+require "../vendor/autoload.php";
 require "../Controller/search.php";
+use Controller\search;
 $search = new search();
 
 $output = '';

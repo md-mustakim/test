@@ -1,18 +1,20 @@
 <?php
-require "../model/Student.php";
-require "../model/Class_list.php";
-require "../model/Config.php";
-
+namespace Controller;
+use Model\Student;
+use Model\Class_list;
+use Model\Config;
+use PDO;
+use PDOException;
  class search{
-     public $keyword;
-     public $con;
-     public $student;
-     public $class;
+     public string $keyword;
+     public PDO $con;
+     public Student $student;
+     public Class_list $class;
      public function __construct()
      {
-         $this->con = new config();
-         $this->student =new student($this->con->dbconnect());
-         $this->class = new Class_list($this->con->dbconnect());
+         $this->con = (new config())->connection;
+         $this->student =new student();
+         $this->class = new Class_list();
      }
      public function classAndShift($classId){
          return $this->class->classAndShiftName($classId);
@@ -23,12 +25,12 @@ require "../model/Config.php";
          if(empty($this->keyword))
          {
              $q= "SELECT * FROM student_info where status=1 order by student_info.id DESC LIMIT 10";
-             $stmt = $this->con->dbconnect()->prepare($q);
+             $stmt = $this->con->prepare($q);
              $stmt->execute();
          }else
          {
              $q = "SELECT * FROM student_info where status=1 and name LIKE ? LIMIT 10";
-             $stmt = $this->con->dbconnect()->prepare($q);
+             $stmt = $this->con->prepare($q);
              $parms = array("%$this->keyword%");
              $stmt->execute($parms);
 
@@ -70,10 +72,11 @@ require "../model/Config.php";
          return  $this->class->class_shift();
 
      }
-     public function search_by_class($class_id){
-         $r = $this->student->show_studentByclass($class_id);
+     public function search_by_class(int $class_id): array
+     {
+         $r = $this->student->showStudentByClass($class_id);
          $data = array();
-         foreach ($r as $i => $k)
+         foreach ($r['data'] as $i => $k)
          {
              $data[] = [
                'student_id' => $k['id'],
@@ -81,7 +84,8 @@ require "../model/Config.php";
                'class_roll' => $k['class_roll'],
                'student_name' => $k['name'],
                'father_number' => $k['fnumber'],
-               'mother_number' => $k['mnumber'],             ];
+               'mother_number' => $k['mnumber'],
+             ];
          }
          return $data;
 

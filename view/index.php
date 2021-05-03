@@ -1,5 +1,9 @@
-<?php //
-    $tstart = microtime(true);
+<?php
+
+use Controller\dashboard;
+
+$tStart = microtime(true);
+    include "../vendor/autoload.php";
     include "auth/session.php";
     require "../Controller/dashboard.php";
     $dc = new dashboard();
@@ -7,8 +11,8 @@
 
 <!DOCTYPE HTML>
 <html lang="en-US">
-<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Home | Holy Care School</title>
 	<link rel="icon" href="../img/icon.ico"/>
     <script src="../src/jquery_2_1_3.min.js"></script>
@@ -40,7 +44,8 @@
                            </thead>
                             <tbody>
                             <?php $total = 0;
-                            foreach ($dc->classView() as $item => $value){  ?>
+                            $dashboard = new dashboard();
+                            foreach ($dashboard->classView() as $item => $value){  ?>
                             <tr>
                                 <td><?php echo $value['0'];?></td>
                                 <td><?php echo $value['1'];?></td>
@@ -79,8 +84,6 @@
 	<!---script type="text/javascript" src="src/loader.js"></script-->
 <script>
     function checkBalance() {
-
-
         $.ajax({
             url: '../ajax/index.php',
             method: 'post',
@@ -95,7 +98,7 @@
     }
 </script>
 <?php $end = microtime(true);
-    echo $result = round($end-$tstart,3)."s";
+    echo $result = round($end-$tStart,3)."s";
 ?>
 <script src="../src/bootstrap/js/bootstrap.min.js"></script>
 </body>

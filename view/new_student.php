@@ -1,11 +1,16 @@
 <?php
+
 	session_start();
+	require "../vendor/autoload.php";
 	require "../model/Student.php";
 	require "../model/Class_list.php";
 	require "../model/Config.php";
+	use Model\Config;
+	use Model\Student;
+	use Model\Class_list;
 	$config = new config();
-	$student= new student($config->dbconnect());
-	$class= new Class_list($config->dbconnect());
+	$student= new student();
+	$class= new Class_list();
 
 
     if(isset($_POST['submit']))
