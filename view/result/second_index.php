@@ -1,4 +1,5 @@
 <?php 
+    include "../../vendor/autoload.php";
     include "../auth/session.php";
     include"../../db.php";
     include"../../function_list.php";

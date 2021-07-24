@@ -17,17 +17,17 @@
             </div>
 
 
-            <div class="btn-light p-2 border-bottom bg-info text-light m-pointer font-weight-bold" data-toggle="collapse" data-target="#result"> Result
-                <i class="fas fa-angle-down float-right p-1"></i>
-            </div>
+            <!--  <div class="btn-light p-2 border-bottom bg-info text-light m-pointer font-weight-bold" data-toggle="collapse" data-target="#result"> Result
+              <i class="fas fa-angle-down float-right p-1"></i>
+          </div>
 
-            <div class="collapse text-light p-0 m-0 text-light" id="result">
-                <ul class="list-group list-group-flush p-0 m-0">
-                    <li class="list-group-item bg-secondary m-pointer"> <a href="result/second_index.php?semester=1&class=1" class="text-decoration-none text-light">1st Semester</a> </li>
-                    <li class="list-group-item bg-secondary m-pointer"> <a href="result/second_index.php?semester=2&class=1" class="text-decoration-none text-light">2nd Semester</a> </li>
-                    <li class="list-group-item bg-secondary m-pointer"> <a href="result/second_index.php?semester=3&class=1" class="text-decoration-none text-light">2nd Semester</a> </li>
-                </ul>
-            </div>
+         <!-lass="collapse text-light p-0 m-0 text-light" id="result">
+              <ul class="list-group list-group-flush p-0 m-0">
+                  <li class="list-group-item bg-secondary m-pointer"> <a href="result/second_index.php?semester=1&class=1" class="text-decoration-none text-light">1st Semester</a> </li>
+                  <li class="list-group-item bg-secondary m-pointer"> <a href="result/second_index.php?semester=2&class=1" class="text-decoration-none text-light">2nd Semester</a> </li>
+                  <li class="list-group-item bg-secondary m-pointer"> <a href="result/second_index.php?semester=3&class=1" class="text-decoration-none text-light">2nd Semester</a> </li>
+              </ul>
+          </div>-->
 
 
             <div class="btn-light p-2 border-bottom bg-info text-light m-pointer font-weight-bold" data-toggle="collapse" data-target="#teacher"> Teacher

@@ -74,6 +74,7 @@
                         }
                     ?>
                     <option value="200">Staff /Teacher</option>
+                    <option value="300">Admin</option>
 
                 </select>
                 <small id="group_msg"></small>

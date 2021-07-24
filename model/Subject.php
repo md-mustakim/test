@@ -2,12 +2,13 @@
     namespace Model;
     use PDO;
     use PDOException;
-class Subject{
+
+    class Subject{
     private PDO $connect;
 
-    public function __construct($connect)
+    public function __construct()
     {
-        $this->connect = $connect;
+        $this->connect = (new Config())->connection;
     }
 
     public function allSubject(): array

@@ -1,40 +1,40 @@
 <?php
-require "../../model/Student.php";
-require "../../model/Class_list.php";
-require "../../model/Config.php";
-require "../../model/Subject.php";
+namespace Controller;
+use PDO;
+use Model\Student;
+use Model\Class_list;
+use Model\Subject;
+
 
 
 class resultController{
+    public Subject $subject;
+    public Student $student;
+    public Class_list $class;
+    public int $student_id;
+    protected PDO $connect;
 
-    public $con;
-    public $subject;
-    public $connect;
-    public $student;
-    public $class;
-    public $student_id;
     public function __construct()
     {
-        $this->con = new config();
-        $this->connect = $this->con->dbconnect();
-        $this->student =new student($this->con->dbconnect());
-        $this->class = new Class_list($this->con->dbconnect());
-        $this->subject = new Subject($this->con->dbconnect());
+        $this->student =new student();
+        $this->class = new Class_list();
+        $this->subject = new Subject();
     }
 
 
 
-    public function all_class_shift(){
+    public function all_class_shift(): array
+    {
         return  $this->class->class_shift();
-
     }
 
-    public function classAndShiftName($class_id){
+    public function classAndShiftName($class_id): array
+    {
         return  $this->class->classAndShiftName($class_id);
-
     }
 
-    public function student_view(){
+    public function student_view(): object
+    {
         return (object)$this->student->show($this->student_id);
     }
 
@@ -53,7 +53,7 @@ class resultController{
     public function get_marks($subjid,$unid,$type)
     {
         $q ="SELECT * FROM marksheed_2019 where subject_id=$subjid and regid=$unid and type=$type";
-        $stmt = $this->con->dbconnect()->prepare($q);
+        $stmt = $this->connect->prepare($q);
         $stmt->execute();
         $data = $stmt->fetchAll();
         $count = $stmt->rowCount();
@@ -82,7 +82,7 @@ class resultController{
             }
 
             $result[] = array(
-                'subject_name' => $this->subject->subject_name($subject_id)->subject_name,
+                'subject_name' => $this->subject->subjectName($subject_id),
                 'marks' => $mark,
 
 
@@ -98,10 +98,6 @@ class resultController{
             'total' => $total
 
         );
-
-
-
-
         return array(
             'student_info' => $student_info_real,
             'result' => $result,
